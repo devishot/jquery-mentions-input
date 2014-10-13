@@ -82,7 +82,11 @@
       elmInputWrapper = elmInputBox.parent();
       elmWrapperBox = $(settings.templates.wrapper());
       elmInputBox.wrapAll(elmWrapperBox);
-      elmWrapperBox = elmInputWrapper.find('> div');
+
+      wrapper_sel_id = $(settings.templates.wrapper()).prop('id');
+      wrapper_sel_id = (wrapper_sel_id.length>0) ? ('#'+wrapper_sel_id) : ''
+      wrapper_sel_class = '.'+$(settings.templates.wrapper()).prop('class').replace(' ', '.')
+      elmWrapperBox = elmInputWrapper.find(wrapper_sel_id+wrapper_sel_class);
 
       elmInputBox.attr('data-mentions-input', 'true');
       elmInputBox.bind('keydown', onInputBoxKeyDown);
@@ -105,6 +109,8 @@
     }
 
     function initMentionsOverlay() {
+      elmWrapperBox.append($('<img src="" alt="" />'));
+
       elmMentionsOverlay = $(settings.templates.mentionsOverlay());
       elmMentionsOverlay.prependTo(elmWrapperBox);
     }
